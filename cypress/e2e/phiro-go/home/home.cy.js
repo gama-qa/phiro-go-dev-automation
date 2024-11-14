@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Home - navigate to self service menu', () => {
+describe('Home - navigate to self service menu and validate all component at HomePage', () => {
     const dataAccount = {
         correctAccount: {
             username: 'BJI1010822005',
@@ -35,6 +35,15 @@ describe('Home - navigate to self service menu', () => {
     it('Should can navigate when click any self service menu', () => {
         // Assertion profile name
         cy.get('p.profile__name').should('have.text', dataAccount.correctAccount2.nameEmployee)
+
+        // Assertion Leave balance panel
+        cy.get('.leave-balance-panel').should('be.visible')
+        // Task alert panel
+        cy.get('.taskAlertPanel').should('be.visible')
+        // News update panel
+        cy.get('.news-update-panel').should('be.visible')
+        // Shortcut Box
+        /cy.get('.shortcut-box').should('be.visible')
 
 
         // Navigate to leave page menu
@@ -81,10 +90,8 @@ describe('Home - navigate to self service menu', () => {
 
         // Navigate to Payslip menu
         cy.get('#payslip').click()
-        cy.get('h4.title-label').should('be.visible')
-        cy.get('.card-login-info').should('be.visible')
-        cy.get('#addattmonitoring').should('be.visible')
-        cy.get('.ticket').should('be.visible')
+        cy.get('h3.page-title').should('be.visible')
+        cy.get('form#filterPeriod').should('be.visible')
         // Back to home page
         cy.get('a[href="/dashboard"]').click({multiple: true})
         cy.wait(7000)
